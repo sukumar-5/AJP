@@ -1,10 +1,11 @@
 const express = require("express");
-
 const app = express();
+
 app.use(express.json());
+
 app.get('/Add', (req, res) => {
-    const a = parseFloat(req.query.num1);
-    const b = parseFloat(req.query.num2);
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
     if (isNaN(num1) || isNaN(num2)) {
         return res.status(400).json({ error: "Please provide valid numbers" });
@@ -12,9 +13,10 @@ app.get('/Add', (req, res) => {
 
     res.json({ operation: "Addition", num1, num2, result: num1 + num2 });
 });
+
 app.get('/Subtract', (req, res) => {
-    const a = parseFloat(req.query.num1);
-    const b = parseFloat(req.query.num2);
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
     if (isNaN(num1) || isNaN(num2)) {
         return res.status(400).json({ error: "Please provide valid numbers" });
@@ -22,9 +24,10 @@ app.get('/Subtract', (req, res) => {
 
     res.json({ operation: "Subtraction", num1, num2, result: num1 - num2 });
 });
+
 app.get('/Multiplication', (req, res) => {
-    const a = parseFloat(req.query.num1);
-    const b = parseFloat(req.query.num2);
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
     if (isNaN(num1) || isNaN(num2)) {
         return res.status(400).json({ error: "Please provide valid numbers" });
@@ -32,9 +35,10 @@ app.get('/Multiplication', (req, res) => {
 
     res.json({ operation: "Multiplication", num1, num2, result: num1 * num2 });
 });
+
 app.get('/Division', (req, res) => {
-    const a = parseFloat(req.query.num1);
-    const b = parseFloat(req.query.num2);
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
     if (isNaN(num1) || isNaN(num2)) {
         return res.status(400).json({ error: "Please provide valid numbers" });
