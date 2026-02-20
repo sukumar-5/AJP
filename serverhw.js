@@ -1,31 +1,53 @@
-const express = require("express")
+const express = require("express");
 
-const app = express()
+const app = express();
+app.use(express.json());
+app.get('/Add', (req, res) => {
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
-app.use(express.json())
+    if (isNaN(num1) || isNaN(num2)) {
+        return res.status(400).json({ error: "Please provide valid numbers" });
+    }
 
-app.get('/RESTapi', (req, res) => {
-    res.json({ message: "hello " })
-})
+    res.json({ operation: "Addition", num1, num2, result: num1 + num2 });
+});
+app.get('/Subtract', (req, res) => {
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
-app.get('/about', (req, res) => {
-    res.json({ message: "This is the about page" })
-})
+    if (isNaN(num1) || isNaN(num2)) {
+        return res.status(400).json({ error: "Please provide valid numbers" });
+    }
 
-app.get('/users', (req, res) => {
-    res.json({ message: "List of users" })
-})
+    res.json({ operation: "Subtraction", num1, num2, result: num1 - num2 });
+});
+app.get('/Multiplication', (req, res) => {
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
-app.get('/products', (req, res) => {
-    res.json({ message: "List of products" })
-})
+    if (isNaN(num1) || isNaN(num2)) {
+        return res.status(400).json({ error: "Please provide valid numbers" });
+    }
 
-app.get('/contact', (req, res) => {
-    res.json({ message: "Contact us page" })
-})
+    res.json({ operation: "Multiplication", num1, num2, result: num1 * num2 });
+});
+app.get('/Division', (req, res) => {
+    const num1 = parseFloat(req.query.num1);
+    const num2 = parseFloat(req.query.num2);
 
-const port = process.env.PORT || 3000
+    if (isNaN(num1) || isNaN(num2)) {
+        return res.status(400).json({ error: "Please provide valid numbers" });
+    }
 
+    if (num2 === 0) {
+        return res.status(400).json({ error: "Cannot divide by zero" });
+    }
+
+    res.json({ operation: "Division", num1, num2, result: num1 / num2 });
+});
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Express Rest api running on http://localhost:${port}`)
-})
+    console.log(`Express REST API running on http://localhost:${port}`);
+});
